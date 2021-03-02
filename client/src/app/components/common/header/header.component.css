@@ -1,0 +1,41 @@
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.menu {
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+.item {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: white;
+}
+
+.rrss {
+  padding-top: 1%;
+  font-size: 25px;
+}
+
+.fa-facebook-f:hover {
+  color: blue;
+}
+
+.fa-twitter:hover {
+  color: royalblue;
+}
+
+.fa-instagram:hover {
+  color: rosybrown;
+}
+
+.fa-youtube:hover {
+  color: red;
+}

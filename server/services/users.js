@@ -1,27 +1,16 @@
-var config = require('../conf/token');
+const config = require('../conf/token');
+//DB SETTINGS
+const db = require('../db/db-connection');
+const pool = db.getPool();
+
 const jwt = require('jsonwebtoken')
 var promise = require('bluebird');
 
-var options = {
-  // Initialization Options
-  promiseLib: promise
-};
-
-var pgp = require('pg-promise')(options);
-
-var db = pgp({
-    host: 'localhost',
-    port: 5432,
-    database: 'librafydb',
-    user: 'librafy',
-    password: 'l1br44u'
-});
-
 /* /api/v1/login */
-var login_user_query = 'INSERT INTO public.book (titulo, isbn_10, isbn_13, valoracion, autor)' +
-                        ' values(${titulo}, ${isbn_10}, ${isbn_13}, ${valoracion}, ${autor})';
+// var login_user_query = 'INSERT INTO public.book (titulo, isbn_10, isbn_13, valoracion, autor)' +
+//                        ' values(${titulo}, ${isbn_10}, ${isbn_13}, ${valoracion}, ${autor})';
 
-function loginUser(req, res, next) {
+/*function loginUser(req, res, next) {
   //const tokenList = {};
   const postData = req.body;
   const user = {
@@ -39,7 +28,7 @@ function loginUser(req, res, next) {
   }
   //tokenList[refreshToken] = response
   res.status(200).json(response);
-}
+}*/
 
 /* /api/v1/login */
 //var login_user_query = 'SELECT id, name, role FROM public."User" WHERE name = \'${user}\'';// AND password = ${password} AND active = true';
@@ -64,6 +53,60 @@ function loginUser(req, res, next) {
     });
 }*/
 
+/* /api/v1/users */
+var single_user_query = 'SELECT id, name, password, email, role, active  FROM public.user WHERE name = $1';
+
+function getUserByName(req, res, next) {
+  try {
+    const query = {
+      text: single_user_query,
+      rowMode: 'json',
+      values: [req.params.name]
+    };
+
+    pool.on('error', (error, client) => {
+      // logger.error('Error en la conexión con base de datos', error);
+      process.exit(-1);
+      res.json({ status: 500, 'error': error});
+      return;
+    });
+
+    pool.connect((connError, client, done) => {
+      done();
+      if (connError) {
+        // logger.error(connError.stack);
+        res.json({ status: 500, 'error': err});
+        return;
+      }
+      client.query(query, (queryError, queryResult) => {
+        done();
+        if (queryError) {
+          // logger.error(queryError.stack);
+          res.json({ status: 500, 'error': queryError.stack});
+          return;
+        } else {
+          res.json(queryResult.rows);
+        }
+      });
+    });
+  } catch (error) {
+    // logger.error('Error obteniendo rol');
+    res.json({ status: 500, 'error': error});
+    return;
+  }
+  /*
+  var userName = req.params.name;
+  const users = req.body;
+    db.any(single_user_query, userName)
+      .then(function (data) {
+        res.status(200)
+          .json(data);
+      })
+      .catch(function (err) {
+        return next(err);
+      });*/
+}
+
 module.exports = {
-  loginUser: loginUser
+  getUserByName: getUserByName
 };

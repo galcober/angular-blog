@@ -1,4 +1,5 @@
 import { Book } from '../app/models/Book';
+import { Post } from '../app/models/Post';
 
 export class Utils {
 
@@ -19,6 +20,17 @@ export class Utils {
         autor: autor
       };
       return newBook;
+    }
+
+    createPost(title, summary, body, authorid, imageid) {
+      const newPost: Post = {
+        title: title,
+        summary: summary,
+        body: body,
+        authorid: authorid,
+        imageid: imageid
+      };
+      return newPost;
     }
 
 }

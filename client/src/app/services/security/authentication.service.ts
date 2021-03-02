@@ -14,6 +14,7 @@ export class AuthenticationService {
 
   login(user: User) {
     const token = jwt.sign(user, 'test', { expiresIn: 900});
+    console.log('Token original: ' + token);
     localStorage.setItem('currentUser', JSON.stringify({ username: user.name, email: user.email, token: token}));
     // console.log('Token: ' + token);
     /*return this.http.post<User>(this.api_users_url, user)

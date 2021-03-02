@@ -1,4 +1,47 @@
-<p>
-  Estas en el panel de administración.
-  <a routerLink="/">Go back</a>
-</p>
+<a *ngIf="logged" routerLink="/login" (click)="logout()" class="badge badge-danger">Logout</a>
+
+<div class="card col-md-12">
+  {{ editorContent }}
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>title</th>
+      <th>summary</th>
+      <th>body</th>
+      <th>authorId</th>
+      <th>imageId</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of posts">
+      <td> {{ post.id }} </td>
+      <td> {{ post.title }} </td>
+      <td> {{ post.summary }} </td>
+      <td> {{ post.body }} </td>
+      <td> {{ post.authorid }} </td>
+      <td> {{ post.imageid }} </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="col-md-12">
+  <div class="card col-md-6">
+    <div class="card-body">
+      <form (submit)="createPost($event)">
+        <div class="input-group">
+          <input type="text" name="title" [(ngModel)]="title" placeholder="Crear Post" class="form-control">
+          <span class="input-group-addon">
+            <button type="submit" class="btn btn-primary">
+              Crear Post
+            </button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div [froalaEditor]='options' [(froalaModel)]="editorContent">Hello, Froala!</div>

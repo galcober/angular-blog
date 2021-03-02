@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('librafy-api:server');
+var debug = require('debug')('angular-blog:server');
 var http = require('http');
 
 /**

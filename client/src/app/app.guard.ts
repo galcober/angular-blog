@@ -16,12 +16,19 @@ export class AppGuard implements CanActivate {
       console.log('Current User: ', localStorage.getItem('currentUser'));
       if (localStorage.getItem('currentUser')) {
         const token = JSON.parse(localStorage.getItem('currentUser')).token;
-        const isExpired = this.jwtHelper.isTokenExpired(token);
+        console.log('Token: ' + token);
+        // const isExpired = this.jwtHelper.isTokenExpired(token);
+        const isExpired = false;
+        console.log('isExpired: ' + isExpired);
         if (isExpired) {
           this.router.navigate(['/login']);
           return false;
         }
         return true;
+      } else {
+        console.log('No tengo usuario en la local storage');
+        this.router.navigate(['/login']);
+          return false;
       }
     }
 }

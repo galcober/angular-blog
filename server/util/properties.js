@@ -8,10 +8,10 @@ exports.CORS_HEADERS_ALLOW_METHODS_VALUE = 'GET, POST, PUT, DELETE, PATCH, OPTIO
 
 /* DB CONFIGURATION */
 
-exports.DB_USER = 'librafy';
+exports.DB_USER = 'galcober';
 exports.DB_HOST = 'localhost';
-exports.DB_NAME = 'librafydb';
-exports.DB_PASSWORD = 'l1br44u';
+exports.DB_NAME = 'galcoblog';
+exports.DB_PASSWORD = 'Hoteldusk05';
 exports.DB_PORT = 5432;
 exports.DB_MAX_CONNECTIONS = 10;
 exports.DB_IDLE_TIMEOUT_MILLIS = 30000;

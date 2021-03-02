@@ -8,6 +8,7 @@ export class Properties {
     // API SERVICE NAMES
     public static API_SERVICE_BOOKS = 'books';
     public static API_SERVICE_USERS = 'users';
+    public static API_SERVICE_POSTS = 'posts';
 
     // API METHOD NAME
     public static API_METHOD_SEARCH = '/search';
